@@ -1,0 +1,48 @@
+<div class="centered_box">
+<h1>Get your texts classified!</h1>
+<p class="box">Submit a plain text o search for tweets by a Twitter quey (flag the checkbox)</p>
+<form id ="search_div_box" class="box">
+	<label class="std_margin label" for="Search for tweet" class="gen_label">Write your tweets below</label>
+	<input class="std_margin input" type="text" name="query" id="query_input">
+	{% csrf_token %}
+	<center><label for="is_tweet_cb" style="margin-top:20px;"><b>twitter query?</b></label>
+	<input  id="is_tweet_cb" class="std_margin" type="checkbox" name="twitter_query"><br>
+	<button class="btn" id="search_for_tweets">Search for tweet</button></center>
+</form>
+
+<div style="display:none" id="response_main_div">
+	<h1>Results</h1>
+	<div id="wait_message"></div>
+	<div id="results"></div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$("#search_div_box").submit(function(event){
+				event.preventDefault();
+				$("#response_main_div").show();
+				$("#wait_message").html("Please wait...");
+				var checkbox = $("#is_tweet_cb").is(":checked");
+				if ($("#query_input").val() == ""){
+					$("#wait_message").html("Please fill the input box with some text");
+					return;
+				}
+				if (checkbox){
+					$("#wait_message").html("Please wait; searching in progress...");
+				}else{
+					$("#wait_message").html("Please wait...");
+				}
+				$.ajax({
+					type: "POST",
+  					url: "classify",
+  					data: $("#search_div_box").serialize()
+				}).done(function(data) {
+					$("#wait_message").html("");
+					var result = processData(data);
+					$("#results").html(result);
+				});
+			});
+});
+</script>
+</div>

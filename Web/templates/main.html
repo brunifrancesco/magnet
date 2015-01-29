@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<meta name="keywords" content="social, sentiment analysis">
+	<meta name="author" content="Francesco Bruni">
+	<meta http‐equiv="Content‐Type" content="text/html; charset=UTF‐8">
+	<title>Magnet</title>
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+	<script type="text/javascript" src="{{ STATIC_URL }}js/jquery11.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/script.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			requestForView("intro");
+		});
+	</script>
+</head>
+
+<body>
+	<header>
+	<div>
+		<table>
+		<tr>
+		<td class="col">
+			<img alt="magnet_logo" src="{{ STATIC_URL }}images/logo_magnet.png" />
+		<td>
+		<td class="col">
+			<span class="index btn" onclick="requestForView('intro')">Home</span>
+		<td>
+		<td class="col">
+			<span class="tweets btn" onclick="requestForView('tweets')">Tweets</span>
+		<td>
+		<td class="col">
+			<span class="search btn" onclick="requestForView('search')">Classifiy</span>
+		<td>
+		</tr>
+		</table>
+	</div>
+	</header>
+	<div>
+	<section id="content"></section>
+	</div>
+</body>
+</html>

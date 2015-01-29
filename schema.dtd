@@ -1,0 +1,13 @@
+<!ELEMENT result (status,message?,tweets?)>
+<!ELEMENT info (status,message)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT message (#PCDATA)>
+<!ELEMENT tweets (tweet)*>
+<!ELEMENT tweet (text,unigrams?,ngrams?,emoticons?)>
+<!ELEMENT text (#PCDATA)>
+<!ELEMENT unigrams (unigram)*>
+<!ELEMENT unigram (#PCDATA)>
+<!ELEMENT ngrams (ngram)*>
+<!ELEMENT ngram (#PCDATA)>
+<!ELEMENT emoticons (emoticon)*>
+<!ELEMENT emoticon (#PCDATA)>

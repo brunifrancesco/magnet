@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<!DOCTYPE schema SYSTEM "schema.dtd">
+{% spaceless %}
+
+<result>
+	<status>{{status}}</status>
+	{% if status != 200 %}
+	<error>{{error}}</error>
+	{% else %}
+	<tweets>
+	{% for r in results %}
+	<tweet>
+	<text>{{r.text}}</text>
+	<label>{{r.label}}</label>
+	{% if r.unigrams|length > 0 %}
+	<unigrams>
+		{% for unigram in r.unigrams %}
+		<unigram>{{unigram}}</unigram>
+		{% endfor %}
+	</unigrams>
+	{% endif%}
+	{% if r.ngrams|length > 0 %}<ngrams>
+	{% for ngram in r.ngrams %}<ngram>{{ngram}}</ngram>{% endfor %}
+	</ngrams>
+	{% endif%}
+	{% if r.emoticons|length > 0 %}<emoticons>
+	{% for emoticon in r.emoticons %}<emoticon>{{emoticon}}</emoticon>{% endfor %}
+	</emoticons>
+	{% endif %}
+	</tweet>
+	{% endfor %}
+</tweets>
+{% endif %}
+</result>
+{% endspaceless %}

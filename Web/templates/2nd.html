@@ -1,0 +1,49 @@
+<div class="centered_box">
+<h1>Sample tweet</h1> 
+<div><button onclick="requestForView('tweets')" style="margin-left:20px" class="btn">Show others</button></div> 
+{% for tweet in tweets %}
+    <div class="box">
+    	<span><label><b>Text</b>:</label>{% autoescape off %}{{ tweet.text }}{% endautoescape %}</span>
+    	{% if tweet.sentiment == -3%}<span class="tweet_label">NEG</span>{% endif %}
+    	{% if tweet.sentiment == 3%}<span class="tweet_label">POS</span>{% endif %}
+    	<div>
+		
+		<div><label><b>Ngrams</b></label>: 
+    {% if tweet.features.ngrams|length > 0 %}
+    {% for ngram in tweet.features.ngrams %}    	
+    		<span>[{{ngram}}]</span>
+		{% endfor %}
+    {% else %} -
+    {% endif%}
+		</div>
+		
+		<div><label><b>Filtered Unigrams</b></label>: 
+    {% if tweet.features.filtered_unigram|length > 0 %}
+    {% for filtered_unigram in tweet.features.filtered_unigram %}    	
+    		<span>[{{filtered_unigram}}]</span>
+		{% endfor %}
+    {% else %} -
+    {% endif%}
+		</div>
+
+		<div><label><b>Raw Features List</b></label>: 
+    {% if tweet.features.raw_feature_list_neg|length > 0 %}
+    {% for raw_feature_list_neg in tweet.features.raw_feature_list_neg %}    	
+    		<span>[{{raw_feature_list_neg}}]</span>
+		{% endfor %}
+    {% else %} -
+    {% endif%}
+		</div>
+		
+		<div><label><b>Emoticons</b></label>: 
+		{% if tweet.features.emoticons|length > 0 %}
+		{% for emoticons in tweet.features.emoticons %}    	
+    		<span>[{{emoticons}}]</span>
+		{% endfor %}
+		{% else %} -
+		{% endif%}
+		</div>
+    	</div>
+    </div>
+{% endfor %}
+</div>
